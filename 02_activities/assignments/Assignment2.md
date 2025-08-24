@@ -54,7 +54,11 @@ The store wants to keep customer addresses. Propose two architectures for the CU
 **HINT:** search type 1 vs type 2 slowly changing dimensions. 
 
 ```
-Your answer...
+Type 1 and Type 2 are two different ways of handling data changes, known as Slowly Changing Dimensions (SCDs). In Type 1, changes overwrite the old data, so only the current information is stored and no history is maintained. In Type 2, changes are recorded as new entries, which allows the database to preserve the history of past values along with the current one.
+
+Type 1 (Overwrite): If we only need to store a customer’s current address, we can simply add address fields (e.g., AddressLine1, City, PostalCode) directly to the CUSTOMER table. Each time an address is updated, the old value is replaced.
+
+Type 2 (Retain History): If we need to keep the full history of customer addresses, we should create a separate table, such as CUSTOMER_ADDRESS_HISTORY. This table would contain the address fields along with StartDate and EndDate (or a flag for current). When a customer moves, a new record is inserted with the new address, and the old record is marked as expired, allowing us to track all historical addresses.
 ```
 
 ***
